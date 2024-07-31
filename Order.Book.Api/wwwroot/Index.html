@@ -1,0 +1,39 @@
+﻿<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Book</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+    <script src="orderBook.js"></script>
+</head>
+<body>
+    <h1>Order Book</h1>
+    <button onclick="addOrder()">Add Order</button>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignalR Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/orderbookhub")
+            .build();
+
+        connection.on("ReceiveOrderAddUpdate", function (message) {
+            console.log("Order Added: ", message);
+        });
+
+        connection.on("ReceiveOrderDeleteUpdate", function (message) {
+            console.log("Order Deleted: ", message);
+        });
+
+        connection.start().then(function () {
+            console.log("SignalR connected.");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });</script>
+</body>
+</html>
